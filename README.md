@@ -12,12 +12,11 @@ BGP can be divided in the following components:
 
 This blueprint provides a detailed description on defining a new origin field by:
 
-1. Making changes in Contrail configuration files. 
+1. Making changes in Contrail configuration files.
 2. Making changes in Contrail GUI.
 3. Making changes in controller.
 
 All of these steps are to be performed for the new functionality to work successfully.
-
 
 #2. Problem statement
 ###Normalize route origin when learning routes from a VM/VNF.
@@ -60,15 +59,13 @@ Details in contrail-web-controller repo README.md
 
 There were no changes made in logs, UVEs or alarms.
 
-
-
 #4. Implementation
 ##4.1  Work items
 
 It has 4 modules. The first module involves the changes in configuration files mentioned in section 3.2 above. The second module involves the changes in UI files mentioned in contrail-web-controller repo README.md. The backend changes are mentioned below.
 
-###4.1.1 Controller                                                                                                                 
-Following changes are implemented in Controller to define a new origin field.                                 
+###4.1.1 Controller                                                                                                               
+Following changes are implemented in Controller to define a new origin field.
 ####4.1.1.1 BGP Config:
 + **bgp_config.h:** In **bgp_config.h**, new attribute **bgp_origin** is added in **BgpNeighborConfig** class. For manipulation of this attribute, we have added a **getter/setter** in the same class.
 
@@ -88,9 +85,9 @@ Following changes are implemented in Controller to define a new origin field.
 
 ####4.1.1.4 BgpRibOutPolicy:
 
-+ In **bgp_rib_policy.h**, a new integer bgp origin is defined. 
++ In **bgp_rib_policy.h**, a new integer bgp origin is defined.
 
-+ **bgp_rib_policy.cc**: In the structure **RibExportPolicy**, we add the attribute **bgp_origin** so that origin attribute is advertised to all BGP Peers. In the structure **RibExportPolicy**, the attribute **bgp_origin** is set in the constructor method. As there are total 4 constructors for the structure **RibExportPolicy**, **bgp_origin** is set for the rest of 3 constructors. 
++ **bgp_rib_policy.cc**: In the structure **RibExportPolicy**, we add the attribute **bgp_origin** so that origin attribute is advertised to all BGP Peers. In the structure **RibExportPolicy**, the attribute **bgp_origin** is set in the constructor method. As there are total 4 constructors for the structure **RibExportPolicy**, **bgp_origin** is set for the rest of 3 constructors.
 
 ####4.1.1.5 BgpShowConfig:
 
@@ -98,7 +95,7 @@ Following changes are implemented in Controller to define a new origin field.
 
 + **bgp_peer.sandesh**: Declare bgp_origin in sandesh structure
 
-+ In **bgp_config_ifmap.cc**, **bgp_origin** attribute is set. 
++ In **bgp_config_ifmap.cc**, **bgp_origin** attribute is set.
 
 ###4.1.2 Core files for BgpAttrOrigin:
 
@@ -121,9 +118,9 @@ Following changes are implemented in Controller to define a new origin field.
 + **routing_instance.cc**: In RoutingInstance class, the method AddRTargetRoute sets the origin with a value of IGP.
 
 ####4.1.2.5 BgpMessageBuilder:
-+ **bgp_message_builder.h**: In class BgpMessage, new private constants are defined. 
++ **bgp_message_builder.h**: In class BgpMessage, new private constants are defined.
 
-+ **bgp_message_builder.cc**: In BgpMessageBuilder class, the **StartReach** method has **RibOutAttr** type reference in the parameters. A BgpAttr type pointer is referenced to RibOutAttr attribute. 
++ **bgp_message_builder.cc**: In BgpMessageBuilder class, the **StartReach** method has **RibOutAttr** type reference in the parameters. A BgpAttr type pointer is referenced to RibOutAttr attribute.
 
 ###4.1.3 Checking condition for overriding Bgp Origin value
 
@@ -160,12 +157,11 @@ IFMAP unit test: Check whether value passed from frontend has been received on I
 
 BGPaaS: Check that the value of BGP origin received can be overridden.
 
-
 ##9.2 Dev test
 
-Flow Test Steps: 
+Flow Test Steps:
 
-+ Check if this value is received by IFMAP server at backend. 
++ Check if this value is received by IFMAP server at backend.
 
 + Check that when BGPaaS is created, default (original) value is overridden by user-defined value.
 
