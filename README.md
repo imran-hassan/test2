@@ -156,7 +156,7 @@ There are no dependencies for this feature.
 #9. Testing
 ##9.1 Unit test
 
-IFMAP unit test: Check whether value passed from front end has been received on IFMAP server.
+IFMAP unit test: Check whether value passed from frontend has been received on IFMAP server.
 
 BGPaaS: Check that the value of BGP origin received can be overridden.
 
