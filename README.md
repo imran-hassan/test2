@@ -28,7 +28,7 @@ Contrail by default exposes certain configurable options to the admin in managem
 
 + Pass this value from UI to the configuration node and IF-MAP
 + From configuration node pass it to controller where BGP (core) implementation can access it.
-+ If a user-specified value was provided, then use it otherwise follow existing logic
++ If a user-specified value is provided, then use it otherwise follow existing logic
 
 ##3.1 Alternatives considered
 Describe pros and cons of alternatives considered.
